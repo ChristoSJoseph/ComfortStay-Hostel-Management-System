@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ComfortStay Hostel</title>
+  <style>
+    body { font-family: Poppins, sans-serif; margin: 0; background: linear-gradient(135deg,rgb(255, 100, 150),#2193b0); }
+    header { background: rgba(0,0,0,0.4); color: #fff; padding: 20px; text-align: center; font-size: 26px; }
+    nav { display: flex; justify-content: center; gap: 25px; padding: 12px; background: rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
+    nav a { color: white; cursor: pointer; font-weight: bold; font-size: 17px; transition: 0.3s; }
+    nav a:hover { color: #ffeaa7; transform: translateY(-3px); }
+    section { display: none; padding: 40px 20px; animation: fadeIn 0.9s ease forwards; }
+    .active { display: block; }
+    .container { max-width: 900px; margin: auto; background: rgba(255,255,255,0.9); padding: 30px; border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .room-img { width: 100%; border-radius: 10px; margin: 15px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s ease; }
+    .room-img:hover { transform: scale(1.03); }
+    .input-box { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; margin: 10px 0; font-size: 15px; }
+    .btn { background: #2c3e50; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .glass-box { background: rgba(255,255,255,0.2); border-radius: 15px; padding: 30px; backdrop-filter: blur(10px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); max-width: 450px; margin: auto; }
+  </style>
+</head>
+<body>
+  <header>✨ ComfortStay Hostel ✨</header>
+
+  <nav>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('facility')">Facilities</a>
+    <a onclick="showPage('rooms')">Rooms</a>
+    <a onclick="showPage('contact')">Contact</a>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <section id="home" class="active">
+    <div class="glass-box">
+      <h2 style="text-align:center;">Welcome to ComfortStay Hostel</h2>
+      <h3>Login</h3>
+      <input id="login-email" class="input-box" type="email" placeholder="Enter Email">
+      <input id="login-password" class="input-box" type="password" placeholder="Enter Password">
+      <button class="btn" onclick="login()">Login</button>
+      <p id="login-message" style="color:red;"></p>
+      <hr>
+      <h3>Create Account</h3>
+      <input id="signup-email" class="input-box" type="email" placeholder="Email">
+      <input id="signup-password" class="input-box" type="password" placeholder="Create Strong Password">
+      <button class="btn" onclick="signup()">Sign Up</button>
+      <p id="signup-message" style="color:green;"></p>
+    </div>
+  </section>
+
+  <!-- FACILITIES -->
+  <section id="facility">
+    <div class="container">
+      <h2 style="text-align:center;">Our Facilities</h2>
+      <ul style="font-size:18px; line-height:30px;">
+        <li>🛡️ 24/7 Security with CCTV</li>
+        <li>📶 High-Speed Wi-Fi</li>
+        <li>🍽️ Nutritious Meals</li>
+        <li>🧹 Daily Cleaning</li>
+        <li>📚 Study Lounge</li>
+        <li>🎮 Recreation & Games Room</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ROOMS (Updated with real hostel-style photos) -->
+  <section id="rooms">
+    <div class="container">
+      <h2 style="text-align:center;">Our Rooms</h2>
+
+      <h3>Single Room</h3>
+      <img class="room-img" src="sing.jpg" alt="Single Room" />
+      <p>Private room designed for peace and comfort.</p>
+      <p>Cost of Single Sharing Room : ₹20,000</p>
+
+      <h3>Double Sharing</h3>
+      <img class="room-img" src="double.jpg" alt="Double Room" />
+      <p>Perfect for students who prefer a shared yet peaceful environment.</p>
+      <p>Cost of Double Sharing Room : ₹15,000</p>
+
+      <h3>Triple Sharing</h3>
+      <img class="room-img" src="triple.jpg" alt="Triple Room" />
+      <p>Spacious, affordable, and best for group-living.</p>
+      <p>Cost of Triple Sharing Room : ₹8,5000</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2 style="text-align:center;">Contact Us</h2>
+      <p><strong>Address:</strong> Near Airport Road, Jodhpur, Rajasthan, India</p>
+      <p><strong>Phone:</strong> +91 9876543210</p>
+      <p><strong>Email:</strong> comfortstayhostel@gmail.com</p>
+    </div>
+   <br>
+    <h2 style="text-align:center;">Thanks for Visiting !</h2>
+  </section>
+
+</div>
+  <script>
+    let isLoggedIn = false;
+
+    function showPage(page) {
+      if (!isLoggedIn && page !== 'home') {
+        alert('Please login first!');
+        return;
+      }
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(page).classList.add('active');
+    }
+
+    function signup() {
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      if (!email || !password) {
+        document.getElementById('signup-message').style.color = 'red';
+        document.getElementById('signup-message').textContent = 'All fields required!';
+        return;
+      }
+      if (password.length < 8) {
+        document.getElementById('signup-message').style.color = 'red';
+        document.getElementById('signup-message').textContent = 'Password must be 8+ characters!';
+        return;
+      }
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userPassword', password);
+      document.getElementById('signup-message').style.color = 'green';
+      document.getElementById('signup-message').textContent = 'Account created! Login now.';
+    }
+
+    function login() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      if (email === localStorage.getItem('userEmail') && password === localStorage.getItem('userPassword')) {
+        isLoggedIn = true;
+        showPage('facility');
+      } else {
+        document.getElementById('login-message').textContent = 'Invalid email or password!';
+      }
+    }
+  </script>
+</body>
+</html>
